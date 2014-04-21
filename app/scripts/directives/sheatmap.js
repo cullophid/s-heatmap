@@ -146,13 +146,21 @@ angular.module('sHeatmap', [])
     .directive('sHeatmap', ['simpleheat',
         function(simpleheat) {
             return {
-                template: '<div><canvas></canvas></div>',
+                template: '<canvas style="width : 100%; height : 100%"></canvas>',
                 restrict: 'E',
                 scope: {
                     data: '='
-                }
+                },
                 link: function postLink(scope, element) {
-                    simpleheat(element.find('canvas')[0]).max(scope.data.max).data(scope.data.data).draw();
+                    var canvas = element.find('canvas')[0];
+                    canvas.width = scope.data.cols;
+                    canvas.height = scope.data.rows;
+                    console.log(element[0].offsetWidth);
+                    simpleheat(canvas)
+                        .radius(1, 1)
+                        .max(scope.data.max)
+                        .data(scope.data.data)
+                        .draw();
                 }
 
             };
