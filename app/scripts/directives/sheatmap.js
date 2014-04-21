@@ -157,7 +157,7 @@ angular.module('sHeatmap', [])
                     canvas.height = scope.data.rows;
                     console.log(element[0].offsetWidth);
                     simpleheat(canvas)
-                        .radius(1, 1)
+                        .radius(2, 1)
                         .max(scope.data.max)
                         .data(scope.data.data)
                         .draw();
